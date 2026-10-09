@@ -147,3 +147,25 @@ Each restaurant links its own WhatsApp number by scanning the QR in its admin (`
 | `wa_reminder_hours` | int | Remind disconnected restaurant owners every N hours (0 = off) |
 
 Backend behaviour for `POST /auth/phone/request-code/`: use the tenant's own WhatsApp session; if disconnected or the send errors and `wa_sms_fallback` is true, send SMS and return `channel: "sms"`, `sent_via_whatsapp: false`. If fallback is off, return 503 with a clear message. `/auth/phone/config/` must return `whatsapp_connected` per tenant. Log each fallback in audit (`category: "integrations"`).
+
+---
+
+## Restaurant admin — still missing on the backend (appended)
+
+Each restaurant has its own admin. These are needed by the admin console and are not covered above:
+
+### A. Payment receipt on orders (JazzCash / EasyPaisa)
+- Customer checkout uploads a screenshot/PDF: `POST /orders/{id}/payment-proof/` (multipart `file`, max 8 MB, image/* or pdf).
+- Every order payload must include `payment_proof_url` (absolute https URL, or null) plus `payment_reference`, `amount_paid`, `paid_at`, `verified_by`.
+- Store files per tenant (`tenants/{slug}/receipts/...`), served via signed URL; only that tenant's admin/cashier may read.
+- `POST /orders/{id}/verify-payment/` already exists — log approve/reject in the tenant audit log with who and when.
+
+### B. Other admin gaps
+- Tenant audit log: `GET /admin/audit/` (staff actions on orders, menu, prices, refunds).
+- Refunds: `POST /orders/{id}/refund/` with amount + reason; sets `payment_status=refunded`.
+- Opening hours & holiday closures: `GET/PATCH /admin/settings/hours/`; checkout must reject orders when closed.
+- Delivery zones & fees per branch: `GET/POST/PATCH /branches/{id}/zones/`.
+- Restaurant settings: `GET/PATCH /admin/settings/` (name, logo, tax %, service charge, min order, wallet numbers for JazzCash/EasyPaisa shown at checkout).
+- Reports export: `GET /admin/reports/sales/?from=&to=&format=csv`.
+- Subscription view for the owner: `GET /admin/subscription/` (plan, limits used, next invoice) mirroring platform data.
+- Notifications feed: `GET /admin/notifications/` + WebSocket event `payment_proof_uploaded` so admins see new receipts live.
