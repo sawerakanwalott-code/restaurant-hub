@@ -57,7 +57,7 @@ function ReportsPage() {
     const m = new Map<string, { qty: number; sales: number }>();
     sold.forEach((o) => o.items.forEach((it) => {
       const cur = m.get(it.name) ?? { qty: 0, sales: 0 };
-      m.set(it.name, { qty: cur.qty + it.qty, sales: cur.sales + it.qty * (it.price ?? 0) });
+      m.set(it.name, { qty: cur.qty + it.qty, sales: cur.sales + it.qty * it.price });
     }));
     return [...m.entries()].sort((x, y) => y[1].qty - x[1].qty).slice(0, 8);
   }, [sold]);
@@ -102,7 +102,7 @@ function ReportsPage() {
 
       <div className="grid gap-6 xl:grid-cols-3">
         <Panel title="Sales by day" className="xl:col-span-2">
-          <div className="h-64"><ColumnChart data={byDay} /></div>
+          <ColumnChart data={byDay} xKey="label" moneyFormat bars={[{ key: "value", name: "Sales", color: "var(--color-lux)" }]} height={256} />
         </Panel>
         <Panel title="Busy hours" subtitle={sold.length ? `Peak at ${peak}:00` : undefined}>
           <div className="flex h-48 items-end gap-0.5">
