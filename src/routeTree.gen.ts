@@ -10,33 +10,432 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as CartRouteImport } from './routes/cart'
+import { Route as ChangePasswordRouteImport } from './routes/change-password'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as KitchenRouteImport } from './routes/kitchen'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as OnboardRouteImport } from './routes/onboard'
+import { Route as OwnerRouteImport } from './routes/owner'
+import { Route as PlatformRouteImport } from './routes/platform'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as RiderRouteImport } from './routes/rider'
+import { Route as SignupRouteImport } from './routes/signup'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminBillingRouteImport } from './routes/admin.billing'
+import { Route as AdminBranchesRouteImport } from './routes/admin.branches'
+import { Route as AdminCustomersRouteImport } from './routes/admin.customers'
+import { Route as AdminDishesRouteImport } from './routes/admin.dishes'
+import { Route as AdminInventoryRouteImport } from './routes/admin.inventory'
+import { Route as AdminPaymentsRouteImport } from './routes/admin.payments'
+import { Route as AdminPosRouteImport } from './routes/admin.pos'
+import { Route as AdminRidersRouteImport } from './routes/admin.riders'
+import { Route as AdminStaffRouteImport } from './routes/admin.staff'
+import { Route as AdminWhatsappRouteImport } from './routes/admin.whatsapp'
+import { Route as DishSlugRouteImport } from './routes/dish.$slug'
+import { Route as RiderIndexRouteImport } from './routes/rider.index'
+import { Route as RiderEarningsRouteImport } from './routes/rider.earnings'
+import { Route as RiderJobsRouteImport } from './routes/rider.jobs'
+import { Route as RiderProfileRouteImport } from './routes/rider.profile'
+import { Route as TrackCodeRouteImport } from './routes/track.$code'
+import { Route as AdminOrdersIndexRouteImport } from './routes/admin.orders.index'
+import { Route as AdminOrdersIdRouteImport } from './routes/admin.orders.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChangePasswordRoute = ChangePasswordRouteImport.update({
+  id: '/change-password',
+  path: '/change-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KitchenRoute = KitchenRouteImport.update({
+  id: '/kitchen',
+  path: '/kitchen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardRoute = OnboardRouteImport.update({
+  id: '/onboard',
+  path: '/onboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OwnerRoute = OwnerRouteImport.update({
+  id: '/owner',
+  path: '/owner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlatformRoute = PlatformRouteImport.update({
+  id: '/platform',
+  path: '/platform',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RiderRoute = RiderRouteImport.update({
+  id: '/rider',
+  path: '/rider',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminBillingRoute = AdminBillingRouteImport.update({
+  id: '/billing',
+  path: '/billing',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminBranchesRoute = AdminBranchesRouteImport.update({
+  id: '/branches',
+  path: '/branches',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCustomersRoute = AdminCustomersRouteImport.update({
+  id: '/customers',
+  path: '/customers',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDishesRoute = AdminDishesRouteImport.update({
+  id: '/dishes',
+  path: '/dishes',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminInventoryRoute = AdminInventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPaymentsRoute = AdminPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPosRoute = AdminPosRouteImport.update({
+  id: '/pos',
+  path: '/pos',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminRidersRoute = AdminRidersRouteImport.update({
+  id: '/riders',
+  path: '/riders',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminStaffRoute = AdminStaffRouteImport.update({
+  id: '/staff',
+  path: '/staff',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminWhatsappRoute = AdminWhatsappRouteImport.update({
+  id: '/whatsapp',
+  path: '/whatsapp',
+  getParentRoute: () => AdminRoute,
+} as any)
+const DishSlugRoute = DishSlugRouteImport.update({
+  id: '/dish/$slug',
+  path: '/dish/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RiderIndexRoute = RiderIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => RiderRoute,
+} as any)
+const RiderEarningsRoute = RiderEarningsRouteImport.update({
+  id: '/earnings',
+  path: '/earnings',
+  getParentRoute: () => RiderRoute,
+} as any)
+const RiderJobsRoute = RiderJobsRouteImport.update({
+  id: '/jobs',
+  path: '/jobs',
+  getParentRoute: () => RiderRoute,
+} as any)
+const RiderProfileRoute = RiderProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => RiderRoute,
+} as any)
+const TrackCodeRoute = TrackCodeRouteImport.update({
+  id: '/track/$code',
+  path: '/track/$code',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminOrdersIndexRoute = AdminOrdersIndexRouteImport.update({
+  id: '/orders/',
+  path: '/orders/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminOrdersIdRoute = AdminOrdersIdRouteImport.update({
+  id: '/orders/$id',
+  path: '/orders/$id',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/cart': typeof CartRoute
+  '/change-password': typeof ChangePasswordRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/kitchen': typeof KitchenRoute
+  '/login': typeof LoginRoute
+  '/onboard': typeof OnboardRoute
+  '/owner': typeof OwnerRoute
+  '/platform': typeof PlatformRoute
+  '/profile': typeof ProfileRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/rider': typeof RiderRouteWithChildren
+  '/signup': typeof SignupRoute
+  '/admin/billing': typeof AdminBillingRoute
+  '/admin/branches': typeof AdminBranchesRoute
+  '/admin/customers': typeof AdminCustomersRoute
+  '/admin/dishes': typeof AdminDishesRoute
+  '/admin/inventory': typeof AdminInventoryRoute
+  '/admin/payments': typeof AdminPaymentsRoute
+  '/admin/pos': typeof AdminPosRoute
+  '/admin/riders': typeof AdminRidersRoute
+  '/admin/staff': typeof AdminStaffRoute
+  '/admin/whatsapp': typeof AdminWhatsappRoute
+  '/dish/$slug': typeof DishSlugRoute
+  '/rider/earnings': typeof RiderEarningsRoute
+  '/rider/jobs': typeof RiderJobsRoute
+  '/rider/profile': typeof RiderProfileRoute
+  '/track/$code': typeof TrackCodeRoute
+  '/admin/': typeof AdminIndexRoute
+  '/rider/': typeof RiderIndexRoute
+  '/admin/orders/$id': typeof AdminOrdersIdRoute
+  '/admin/orders/': typeof AdminOrdersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cart': typeof CartRoute
+  '/change-password': typeof ChangePasswordRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/kitchen': typeof KitchenRoute
+  '/login': typeof LoginRoute
+  '/onboard': typeof OnboardRoute
+  '/owner': typeof OwnerRoute
+  '/platform': typeof PlatformRoute
+  '/profile': typeof ProfileRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/signup': typeof SignupRoute
+  '/admin/billing': typeof AdminBillingRoute
+  '/admin/branches': typeof AdminBranchesRoute
+  '/admin/customers': typeof AdminCustomersRoute
+  '/admin/dishes': typeof AdminDishesRoute
+  '/admin/inventory': typeof AdminInventoryRoute
+  '/admin/payments': typeof AdminPaymentsRoute
+  '/admin/pos': typeof AdminPosRoute
+  '/admin/riders': typeof AdminRidersRoute
+  '/admin/staff': typeof AdminStaffRoute
+  '/admin/whatsapp': typeof AdminWhatsappRoute
+  '/dish/$slug': typeof DishSlugRoute
+  '/rider/earnings': typeof RiderEarningsRoute
+  '/rider/jobs': typeof RiderJobsRoute
+  '/rider/profile': typeof RiderProfileRoute
+  '/track/$code': typeof TrackCodeRoute
+  '/admin': typeof AdminIndexRoute
+  '/rider': typeof RiderIndexRoute
+  '/admin/orders/$id': typeof AdminOrdersIdRoute
+  '/admin/orders': typeof AdminOrdersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/cart': typeof CartRoute
+  '/change-password': typeof ChangePasswordRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/kitchen': typeof KitchenRoute
+  '/login': typeof LoginRoute
+  '/onboard': typeof OnboardRoute
+  '/owner': typeof OwnerRoute
+  '/platform': typeof PlatformRoute
+  '/profile': typeof ProfileRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/rider': typeof RiderRouteWithChildren
+  '/signup': typeof SignupRoute
+  '/admin/billing': typeof AdminBillingRoute
+  '/admin/branches': typeof AdminBranchesRoute
+  '/admin/customers': typeof AdminCustomersRoute
+  '/admin/dishes': typeof AdminDishesRoute
+  '/admin/inventory': typeof AdminInventoryRoute
+  '/admin/payments': typeof AdminPaymentsRoute
+  '/admin/pos': typeof AdminPosRoute
+  '/admin/riders': typeof AdminRidersRoute
+  '/admin/staff': typeof AdminStaffRoute
+  '/admin/whatsapp': typeof AdminWhatsappRoute
+  '/dish/$slug': typeof DishSlugRoute
+  '/rider/earnings': typeof RiderEarningsRoute
+  '/rider/jobs': typeof RiderJobsRoute
+  '/rider/profile': typeof RiderProfileRoute
+  '/track/$code': typeof TrackCodeRoute
+  '/admin/': typeof AdminIndexRoute
+  '/rider/': typeof RiderIndexRoute
+  '/admin/orders/$id': typeof AdminOrdersIdRoute
+  '/admin/orders/': typeof AdminOrdersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/cart'
+    | '/change-password'
+    | '/forgot-password'
+    | '/kitchen'
+    | '/login'
+    | '/onboard'
+    | '/owner'
+    | '/platform'
+    | '/profile'
+    | '/reset-password'
+    | '/rider'
+    | '/signup'
+    | '/admin/billing'
+    | '/admin/branches'
+    | '/admin/customers'
+    | '/admin/dishes'
+    | '/admin/inventory'
+    | '/admin/payments'
+    | '/admin/pos'
+    | '/admin/riders'
+    | '/admin/staff'
+    | '/admin/whatsapp'
+    | '/dish/$slug'
+    | '/rider/earnings'
+    | '/rider/jobs'
+    | '/rider/profile'
+    | '/track/$code'
+    | '/admin/'
+    | '/rider/'
+    | '/admin/orders/$id'
+    | '/admin/orders/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/cart'
+    | '/change-password'
+    | '/forgot-password'
+    | '/kitchen'
+    | '/login'
+    | '/onboard'
+    | '/owner'
+    | '/platform'
+    | '/profile'
+    | '/reset-password'
+    | '/signup'
+    | '/admin/billing'
+    | '/admin/branches'
+    | '/admin/customers'
+    | '/admin/dishes'
+    | '/admin/inventory'
+    | '/admin/payments'
+    | '/admin/pos'
+    | '/admin/riders'
+    | '/admin/staff'
+    | '/admin/whatsapp'
+    | '/dish/$slug'
+    | '/rider/earnings'
+    | '/rider/jobs'
+    | '/rider/profile'
+    | '/track/$code'
+    | '/admin'
+    | '/rider'
+    | '/admin/orders/$id'
+    | '/admin/orders'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/cart'
+    | '/change-password'
+    | '/forgot-password'
+    | '/kitchen'
+    | '/login'
+    | '/onboard'
+    | '/owner'
+    | '/platform'
+    | '/profile'
+    | '/reset-password'
+    | '/rider'
+    | '/signup'
+    | '/admin/billing'
+    | '/admin/branches'
+    | '/admin/customers'
+    | '/admin/dishes'
+    | '/admin/inventory'
+    | '/admin/payments'
+    | '/admin/pos'
+    | '/admin/riders'
+    | '/admin/staff'
+    | '/admin/whatsapp'
+    | '/dish/$slug'
+    | '/rider/earnings'
+    | '/rider/jobs'
+    | '/rider/profile'
+    | '/track/$code'
+    | '/admin/'
+    | '/rider/'
+    | '/admin/orders/$id'
+    | '/admin/orders/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  CartRoute: typeof CartRoute
+  ChangePasswordRoute: typeof ChangePasswordRoute
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
+  KitchenRoute: typeof KitchenRoute
+  LoginRoute: typeof LoginRoute
+  OnboardRoute: typeof OnboardRoute
+  OwnerRoute: typeof OwnerRoute
+  PlatformRoute: typeof PlatformRoute
+  ProfileRoute: typeof ProfileRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
+  RiderRoute: typeof RiderRouteWithChildren
+  SignupRoute: typeof SignupRoute
+  DishSlugRoute: typeof DishSlugRoute
+  TrackCodeRoute: typeof TrackCodeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +447,300 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/change-password': {
+      id: '/change-password'
+      path: '/change-password'
+      fullPath: '/change-password'
+      preLoaderRoute: typeof ChangePasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kitchen': {
+      id: '/kitchen'
+      path: '/kitchen'
+      fullPath: '/kitchen'
+      preLoaderRoute: typeof KitchenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboard': {
+      id: '/onboard'
+      path: '/onboard'
+      fullPath: '/onboard'
+      preLoaderRoute: typeof OnboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/owner': {
+      id: '/owner'
+      path: '/owner'
+      fullPath: '/owner'
+      preLoaderRoute: typeof OwnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/platform': {
+      id: '/platform'
+      path: '/platform'
+      fullPath: '/platform'
+      preLoaderRoute: typeof PlatformRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rider': {
+      id: '/rider'
+      path: '/rider'
+      fullPath: '/rider'
+      preLoaderRoute: typeof RiderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/billing': {
+      id: '/admin/billing'
+      path: '/billing'
+      fullPath: '/admin/billing'
+      preLoaderRoute: typeof AdminBillingRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/branches': {
+      id: '/admin/branches'
+      path: '/branches'
+      fullPath: '/admin/branches'
+      preLoaderRoute: typeof AdminBranchesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/customers': {
+      id: '/admin/customers'
+      path: '/customers'
+      fullPath: '/admin/customers'
+      preLoaderRoute: typeof AdminCustomersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/dishes': {
+      id: '/admin/dishes'
+      path: '/dishes'
+      fullPath: '/admin/dishes'
+      preLoaderRoute: typeof AdminDishesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/inventory': {
+      id: '/admin/inventory'
+      path: '/inventory'
+      fullPath: '/admin/inventory'
+      preLoaderRoute: typeof AdminInventoryRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/payments': {
+      id: '/admin/payments'
+      path: '/payments'
+      fullPath: '/admin/payments'
+      preLoaderRoute: typeof AdminPaymentsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/pos': {
+      id: '/admin/pos'
+      path: '/pos'
+      fullPath: '/admin/pos'
+      preLoaderRoute: typeof AdminPosRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/riders': {
+      id: '/admin/riders'
+      path: '/riders'
+      fullPath: '/admin/riders'
+      preLoaderRoute: typeof AdminRidersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/staff': {
+      id: '/admin/staff'
+      path: '/staff'
+      fullPath: '/admin/staff'
+      preLoaderRoute: typeof AdminStaffRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/whatsapp': {
+      id: '/admin/whatsapp'
+      path: '/whatsapp'
+      fullPath: '/admin/whatsapp'
+      preLoaderRoute: typeof AdminWhatsappRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/dish/$slug': {
+      id: '/dish/$slug'
+      path: '/dish/$slug'
+      fullPath: '/dish/$slug'
+      preLoaderRoute: typeof DishSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rider/': {
+      id: '/rider/'
+      path: '/'
+      fullPath: '/rider/'
+      preLoaderRoute: typeof RiderIndexRouteImport
+      parentRoute: typeof RiderRoute
+    }
+    '/rider/earnings': {
+      id: '/rider/earnings'
+      path: '/earnings'
+      fullPath: '/rider/earnings'
+      preLoaderRoute: typeof RiderEarningsRouteImport
+      parentRoute: typeof RiderRoute
+    }
+    '/rider/jobs': {
+      id: '/rider/jobs'
+      path: '/jobs'
+      fullPath: '/rider/jobs'
+      preLoaderRoute: typeof RiderJobsRouteImport
+      parentRoute: typeof RiderRoute
+    }
+    '/rider/profile': {
+      id: '/rider/profile'
+      path: '/profile'
+      fullPath: '/rider/profile'
+      preLoaderRoute: typeof RiderProfileRouteImport
+      parentRoute: typeof RiderRoute
+    }
+    '/track/$code': {
+      id: '/track/$code'
+      path: '/track/$code'
+      fullPath: '/track/$code'
+      preLoaderRoute: typeof TrackCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/orders/': {
+      id: '/admin/orders/'
+      path: '/orders'
+      fullPath: '/admin/orders/'
+      preLoaderRoute: typeof AdminOrdersIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/orders/$id': {
+      id: '/admin/orders/$id'
+      path: '/orders/$id'
+      fullPath: '/admin/orders/$id'
+      preLoaderRoute: typeof AdminOrdersIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminBillingRoute: typeof AdminBillingRoute
+  AdminBranchesRoute: typeof AdminBranchesRoute
+  AdminCustomersRoute: typeof AdminCustomersRoute
+  AdminDishesRoute: typeof AdminDishesRoute
+  AdminInventoryRoute: typeof AdminInventoryRoute
+  AdminPaymentsRoute: typeof AdminPaymentsRoute
+  AdminPosRoute: typeof AdminPosRoute
+  AdminRidersRoute: typeof AdminRidersRoute
+  AdminStaffRoute: typeof AdminStaffRoute
+  AdminWhatsappRoute: typeof AdminWhatsappRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+  AdminOrdersIdRoute: typeof AdminOrdersIdRoute
+  AdminOrdersIndexRoute: typeof AdminOrdersIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminBillingRoute: AdminBillingRoute,
+  AdminBranchesRoute: AdminBranchesRoute,
+  AdminCustomersRoute: AdminCustomersRoute,
+  AdminDishesRoute: AdminDishesRoute,
+  AdminInventoryRoute: AdminInventoryRoute,
+  AdminPaymentsRoute: AdminPaymentsRoute,
+  AdminPosRoute: AdminPosRoute,
+  AdminRidersRoute: AdminRidersRoute,
+  AdminStaffRoute: AdminStaffRoute,
+  AdminWhatsappRoute: AdminWhatsappRoute,
+  AdminIndexRoute: AdminIndexRoute,
+  AdminOrdersIdRoute: AdminOrdersIdRoute,
+  AdminOrdersIndexRoute: AdminOrdersIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface RiderRouteChildren {
+  RiderEarningsRoute: typeof RiderEarningsRoute
+  RiderJobsRoute: typeof RiderJobsRoute
+  RiderProfileRoute: typeof RiderProfileRoute
+  RiderIndexRoute: typeof RiderIndexRoute
+}
+
+const RiderRouteChildren: RiderRouteChildren = {
+  RiderEarningsRoute: RiderEarningsRoute,
+  RiderJobsRoute: RiderJobsRoute,
+  RiderProfileRoute: RiderProfileRoute,
+  RiderIndexRoute: RiderIndexRoute,
+}
+
+const RiderRouteWithChildren = RiderRoute._addFileChildren(RiderRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
+  CartRoute: CartRoute,
+  ChangePasswordRoute: ChangePasswordRoute,
+  ForgotPasswordRoute: ForgotPasswordRoute,
+  KitchenRoute: KitchenRoute,
+  LoginRoute: LoginRoute,
+  OnboardRoute: OnboardRoute,
+  OwnerRoute: OwnerRoute,
+  PlatformRoute: PlatformRoute,
+  ProfileRoute: ProfileRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
+  RiderRoute: RiderRouteWithChildren,
+  SignupRoute: SignupRoute,
+  DishSlugRoute: DishSlugRoute,
+  TrackCodeRoute: TrackCodeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

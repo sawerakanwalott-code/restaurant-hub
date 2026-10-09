@@ -1,0 +1,227 @@
+/* Platform owner console — adapted from the "SSS AdminHub" design.
+   All colours are tokens scoped to .pf so the rest of the app is untouched. */
+.pf {
+  --pf-bg: oklch(0.955 0.004 270);
+  --pf-surface: oklch(0.985 0 0);
+  --pf-surface-2: oklch(0.965 0.003 270);
+  --pf-text: oklch(0.29 0.02 320);
+  --pf-muted: oklch(0.6 0.01 270);
+  --pf-line: oklch(0.91 0.005 270);
+  --pf-blue: oklch(0.63 0.15 252);
+  --pf-blue-soft: oklch(0.92 0.045 245);
+  --pf-yellow: oklch(0.87 0.16 90);
+  --pf-yellow-soft: oklch(0.96 0.05 95);
+  --pf-orange: oklch(0.7 0.18 42);
+  --pf-orange-soft: oklch(0.93 0.04 45);
+  --pf-red: oklch(0.6 0.18 25);
+  --pf-red-soft: oklch(0.94 0.035 25);
+  --pf-green: oklch(0.66 0.15 155);
+  --pf-green-soft: oklch(0.94 0.05 155);
+  --pf-violet: oklch(0.6 0.16 295);
+  --pf-violet-soft: oklch(0.94 0.04 295);
+  --pf-shadow: 0 10px 30px -18px oklch(0.3 0.03 270 / 0.35);
+  --pf-on-color: oklch(0.99 0 0);
+  --pf-display: "Space Grotesk", "Poppins", sans-serif;
+  --pf-body: "Lato", "Poppins", sans-serif;
+  font-family: var(--pf-body);
+  color: var(--pf-text);
+  background: var(--pf-bg);
+  min-height: 100vh;
+}
+.pf.pf-dark {
+  --pf-bg: oklch(0.13 0.02 275);
+  --pf-surface: oklch(0.18 0.03 275);
+  --pf-surface-2: oklch(0.22 0.03 275);
+  --pf-text: oklch(0.97 0 0);
+  --pf-muted: oklch(0.68 0.02 275);
+  --pf-line: oklch(0.28 0.03 275);
+  --pf-blue-soft: oklch(0.32 0.07 252);
+  --pf-yellow-soft: oklch(0.34 0.06 90);
+  --pf-orange-soft: oklch(0.33 0.06 42);
+  --pf-red-soft: oklch(0.32 0.07 25);
+  --pf-green-soft: oklch(0.31 0.06 155);
+  --pf-violet-soft: oklch(0.32 0.07 295);
+  --pf-shadow: 0 10px 30px -18px oklch(0 0 0 / 0.7);
+}
+.pf h1, .pf h2, .pf h3, .pf .pf-display { font-family: var(--pf-display); letter-spacing: -0.02em; }
+
+/* ---------- Sidebar ---------- */
+.pf-sidebar {
+  position: fixed; inset: 0 auto 0 0; width: 260px; z-index: 40;
+  background: var(--pf-surface); overflow-y: auto; overflow-x: hidden;
+  transition: width .3s ease, transform .3s ease;
+  scrollbar-width: none;
+}
+.pf-sidebar.collapsed { width: 72px; }
+.pf-brand { display: flex; align-items: center; gap: 12px; height: 64px; padding: 0 20px; color: var(--pf-blue); font-family: var(--pf-display); font-weight: 700; font-size: 22px; position: sticky; top: 0; background: var(--pf-surface); z-index: 2; }
+.pf-brand-icon { min-width: 36px; height: 36px; border-radius: 12px; background: var(--pf-blue); color: var(--pf-on-color); display: grid; place-items: center; }
+.pf-menu { padding: 0 0 0 6px; margin-top: 12px; }
+.pf-menu-label { font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--pf-muted); padding: 14px 18px 6px; white-space: nowrap; }
+.pf-sidebar.collapsed .pf-menu-label { opacity: 0; height: 12px; padding: 0; }
+.pf-menu li { height: 48px; padding: 4px; border-radius: 48px 0 0 48px; position: relative; list-style: none; }
+.pf-menu li.active { background: var(--pf-bg); }
+.pf-menu li.active::before, .pf-menu li.active::after {
+  content: ""; position: absolute; right: 0; width: 40px; height: 40px; border-radius: 50%; pointer-events: none;
+}
+.pf-menu li.active::before { top: -40px; box-shadow: 20px 20px 0 var(--pf-bg); }
+.pf-menu li.active::after { bottom: -40px; box-shadow: 20px -20px 0 var(--pf-bg); }
+.pf-menu button {
+  width: 100%; height: 100%; display: flex; align-items: center; gap: 14px; border-radius: 48px;
+  background: var(--pf-surface); color: var(--pf-text); font-size: 15px; padding: 0 14px; white-space: nowrap;
+  transition: color .2s; text-align: left; cursor: pointer; border: 0;
+}
+.pf-menu li.active button { color: var(--pf-blue); font-weight: 700; }
+.pf-menu button:hover { color: var(--pf-blue); }
+.pf-menu .pf-logout { color: var(--pf-red); }
+.pf-menu-badge { margin-left: auto; min-width: 22px; height: 22px; padding: 0 7px; border-radius: 99px; background: var(--pf-red); color: var(--pf-on-color); font-size: 11px; font-weight: 800; display: grid; place-items: center; }
+.pf-sidebar.collapsed .pf-menu-badge { position: absolute; top: 6px; left: 36px; min-width: 16px; height: 16px; font-size: 9px; padding: 0 4px; }
+
+/* ---------- Content ---------- */
+.pf-content { margin-left: 260px; transition: margin .3s ease; min-width: 0; }
+.pf-sidebar.collapsed ~ .pf-content { margin-left: 72px; }
+.pf-topbar {
+  height: 64px; background: var(--pf-surface); display: flex; align-items: center; gap: 18px;
+  padding: 0 24px; position: sticky; top: 0; z-index: 30;
+}
+.pf-topbar::before { content: ""; position: absolute; bottom: -40px; left: 0; width: 40px; height: 40px; border-radius: 50%; box-shadow: -20px -20px 0 var(--pf-surface); pointer-events: none; }
+.pf-search { flex: 1; max-width: 420px; display: flex; height: 38px; }
+.pf-search input { flex: 1; min-width: 0; padding: 0 16px; border-radius: 36px 0 0 36px; background: var(--pf-bg); color: var(--pf-text); border: 0; outline: none; }
+.pf-search button { width: 42px; background: var(--pf-blue); color: var(--pf-on-color); border-radius: 0 36px 36px 0; display: grid; place-items: center; border: 0; }
+.pf-icon-btn { position: relative; width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; color: var(--pf-text); background: transparent; border: 0; cursor: pointer; }
+.pf-icon-btn:hover { background: var(--pf-bg); }
+.pf-dot { position: absolute; top: 3px; right: 2px; min-width: 18px; height: 18px; border-radius: 99px; border: 2px solid var(--pf-surface); background: var(--pf-red); color: var(--pf-on-color); font-size: 10px; font-weight: 800; display: grid; place-items: center; }
+.pf-switch { width: 50px; height: 25px; border-radius: 25px; background: var(--pf-line); position: relative; cursor: pointer; border: 0; flex-shrink: 0; }
+.pf-switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 21px; height: 21px; border-radius: 50%; background: var(--pf-blue); transition: transform .25s; }
+.pf-switch.on::after { transform: translateX(25px); }
+.pf-main { padding: 28px 24px 60px; max-width: 1500px; }
+@media (max-width: 1023px) {
+  .pf-sidebar { transform: translateX(-100%); width: 260px !important; box-shadow: var(--pf-shadow); }
+  .pf-sidebar.mobile-open { transform: none; }
+  .pf-content, .pf-sidebar.collapsed ~ .pf-content { margin-left: 0; }
+  .pf-main { padding: 20px 14px 60px; }
+}
+
+/* ---------- Building blocks ---------- */
+.pf-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 22px; }
+.pf-head h1 { font-size: 32px; font-weight: 700; }
+.pf-crumbs { display: flex; gap: 10px; font-size: 13px; color: var(--pf-muted); margin-top: 6px; }
+.pf-crumbs b { color: var(--pf-blue); font-weight: 600; }
+.pf-card { background: var(--pf-surface); border-radius: 8px; padding: 22px; box-shadow: var(--pf-shadow); min-width: 0; }
+.pf-card-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.pf-card-head h3 { font-size: 18px; font-weight: 700; margin-right: auto; }
+.pf-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-bottom: 22px; }
+.pf-kpi { background: var(--pf-surface); border-radius: 8px; padding: 22px; display: flex; align-items: center; gap: 18px; box-shadow: var(--pf-shadow); transition: transform .2s; }
+.pf-kpi:hover { transform: translateY(-3px); }
+.pf-kpi-icon { width: 72px; height: 72px; border-radius: 14px; display: grid; place-items: center; flex-shrink: 0; }
+.pf-kpi h3 { font-size: 24px; font-weight: 700; line-height: 1.1; }
+.pf-kpi p { color: var(--pf-muted); font-size: 13px; margin-top: 2px; }
+.pf-kpi small { display: block; font-size: 11px; font-weight: 700; margin-top: 4px; }
+.tone-blue { background: var(--pf-blue-soft); color: var(--pf-blue); }
+.tone-yellow { background: var(--pf-yellow-soft); color: oklch(0.62 0.13 80); }
+.tone-orange { background: var(--pf-orange-soft); color: var(--pf-orange); }
+.tone-red { background: var(--pf-red-soft); color: var(--pf-red); }
+.tone-green { background: var(--pf-green-soft); color: var(--pf-green); }
+.tone-violet { background: var(--pf-violet-soft); color: var(--pf-violet); }
+.tone-grey { background: var(--pf-surface-2); color: var(--pf-muted); }
+.pf-pill { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; padding: 4px 11px; border-radius: 20px; white-space: nowrap; }
+.pf-pill.solid-blue { background: var(--pf-blue); color: var(--pf-on-color); }
+.pf-pill.solid-yellow { background: var(--pf-yellow); color: var(--pf-text); }
+.pf-pill.solid-orange { background: var(--pf-orange); color: var(--pf-on-color); }
+.pf-pill.solid-red { background: var(--pf-red); color: var(--pf-on-color); }
+.pf-pill.solid-green { background: var(--pf-green); color: var(--pf-on-color); }
+.pf-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 38px; padding: 0 16px; border-radius: 36px; font-weight: 700; font-size: 13px; cursor: pointer; border: 0; white-space: nowrap; transition: filter .2s, transform .1s; }
+.pf-btn:active { transform: scale(.97); }
+.pf-btn:disabled { opacity: .5; cursor: not-allowed; }
+.pf-btn-primary { background: var(--pf-blue); color: var(--pf-on-color); }
+.pf-btn-primary:hover { filter: brightness(1.08); }
+.pf-btn-ghost { background: var(--pf-bg); color: var(--pf-text); }
+.pf-btn-ghost:hover { color: var(--pf-blue); }
+.pf-btn-danger { background: var(--pf-red-soft); color: var(--pf-red); }
+.pf-btn-success { background: var(--pf-green-soft); color: var(--pf-green); }
+.pf-btn-sm { height: 30px; padding: 0 12px; font-size: 12px; }
+.pf-table-wrap { overflow-x: auto; margin: 0 -6px; }
+.pf-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.pf-table th { text-align: left; font-size: 12px; font-weight: 700; color: var(--pf-muted); padding: 0 10px 12px; border-bottom: 1px solid var(--pf-line); white-space: nowrap; }
+.pf-table td { padding: 12px 10px; border-bottom: 1px solid var(--pf-line); vertical-align: middle; }
+.pf-table tbody tr { transition: background .15s; cursor: default; }
+.pf-table tbody tr.clickable { cursor: pointer; }
+.pf-table tbody tr:hover { background: var(--pf-surface-2); }
+.pf-avatar { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 13px; flex-shrink: 0; }
+.pf-input, .pf-select, .pf-textarea { width: 100%; height: 40px; padding: 0 14px; border-radius: 12px; background: var(--pf-bg); color: var(--pf-text); border: 1px solid transparent; outline: none; font-size: 14px; }
+.pf-textarea { height: auto; padding: 10px 14px; resize: vertical; }
+.pf-input:focus, .pf-select:focus, .pf-textarea:focus { border-color: var(--pf-blue); }
+.pf-label { display: block; font-size: 12px; font-weight: 700; color: var(--pf-muted); margin-bottom: 6px; }
+.pf-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.pf-chip { height: 32px; padding: 0 14px; border-radius: 99px; background: var(--pf-surface); color: var(--pf-muted); font-size: 12px; font-weight: 700; border: 1px solid var(--pf-line); cursor: pointer; }
+.pf-chip.on { background: var(--pf-blue); border-color: var(--pf-blue); color: var(--pf-on-color); }
+.pf-progress { height: 8px; border-radius: 99px; background: var(--pf-bg); overflow: hidden; }
+.pf-progress > span { display: block; height: 100%; border-radius: inherit; }
+.pf-grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 22px; }
+.pf-grid-main { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 22px; }
+@media (max-width: 1100px) { .pf-grid-main { grid-template-columns: 1fr; } }
+.pf-banner { display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 14px; font-size: 13px; margin-bottom: 18px; }
+.pf-muted { color: var(--pf-muted); }
+.pf-empty { text-align: center; padding: 40px 10px; color: var(--pf-muted); }
+.pf-fade { animation: pfFade .35s ease both; }
+/* Opacity only: transforms would override modal centering and trap fixed
+   dialogs inside animated cards instead of the viewport. */
+@keyframes pfFade { from { opacity: 0; } to { opacity: 1; } }
+
+/* Drawer / modal */
+.pf-overlay { position: fixed; inset: 0; z-index: 60; background: oklch(0.15 0.02 275 / .45); backdrop-filter: blur(3px); animation: pfFade .2s ease both; }
+.pf-drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(760px, 100%); z-index: 61; background: var(--pf-bg); overflow-y: auto; box-shadow: var(--pf-shadow); animation: pfSlide .3s ease both; }
+@keyframes pfSlide { from { transform: translateX(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+.pf-modal { position: fixed; z-index: 61; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(520px, calc(100% - 24px)); max-height: calc(100dvh - 24px); overflow-y: auto; overscroll-behavior: contain; background: var(--pf-surface); border-radius: 8px; padding: 24px; box-shadow: var(--pf-shadow); }
+.pf-modal-actions { position: sticky; bottom: -24px; margin-bottom: -24px; padding: 12px 0 24px; background: var(--pf-surface); border-top: 1px solid var(--pf-line); z-index: 1; }
+.pf-tabs { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; }
+.pf-tab { height: 36px; padding: 0 16px; border-radius: 99px; font-size: 13px; font-weight: 700; background: transparent; color: var(--pf-muted); border: 0; cursor: pointer; white-space: nowrap; }
+.pf-tab.on { background: var(--pf-surface); color: var(--pf-blue); box-shadow: var(--pf-shadow); }
+.pf-dropdown { position: absolute; top: 52px; right: 0; width: 340px; max-width: calc(100vw - 20px); background: var(--pf-surface); border-radius: 16px; box-shadow: var(--pf-shadow); padding: 8px; z-index: 50; border: 1px solid var(--pf-line); }
+.pf-dropdown-item { display: flex; gap: 10px; padding: 10px; border-radius: 10px; font-size: 13px; width: 100%; text-align: left; background: transparent; border: 0; color: var(--pf-text); cursor: pointer; }
+.pf-dropdown-item:hover { background: var(--pf-bg); }
+
+/* ---------- Lock screen (from the design) ---------- */
+.pf-lock { position: fixed; inset: 0; z-index: 100; overflow: hidden; color: oklch(0.97 0 0); font-family: "Inter", var(--pf-body); background: oklch(0.2 0.03 280); }
+/* Split doors — left/right image panels that slide apart on unlock (from the design) */
+.pf-lock-doors { position: absolute; inset: 0; display: flex; background: oklch(0.12 0.02 280); }
+.pf-lock-door { width: 50%; height: 100%; flex-shrink: 0; background-size: cover; background-repeat: no-repeat; transition: transform 1.05s cubic-bezier(0.65, 0, 0.35, 1); will-change: transform; }
+.pf-lock-door.left { background: 100% 50% / cover no-repeat url("/__l5e/assets-v1/fb597e2e-52fb-4ce4-8224-d396a2d3dad6/kennedy-lock-left.webp"); }
+.pf-lock-door.right { background: 0% 50% / cover no-repeat url("/__l5e/assets-v1/10a13c0d-01c2-4ed1-aaa1-ff3e001089a0/kennedy-lock-right.webp"); }
+.pf-lock-doors::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, oklch(0 0 0 / .55), oklch(0 0 0 / .15) 40%, oklch(0 0 0 / .25)); }
+.pf-lock.opening .pf-lock-door.left { transform: translateX(-105%); }
+.pf-lock.opening .pf-lock-door.right { transform: translateX(105%); }
+.pf-lock.opening .pf-lock-brand, .pf-lock.opening .pf-lock-info, .pf-lock.opening .pf-lock-cta, .pf-lock.opening .pf-pin-wrap { opacity: 0; pointer-events: none; transition: opacity .4s; }
+.pf-lock-brand { position: absolute; top: 36px; left: 40px; display: flex; align-items: center; gap: 12px; z-index: 2; }
+.pf-lock-brand-icon { width: 48px; height: 48px; border-radius: 14px; background: oklch(1 0 0 / .15); backdrop-filter: blur(10px); border: 1px solid oklch(1 0 0 / .25); display: grid; place-items: center; }
+.pf-lock-brand h2 { font-size: 20px; font-weight: 700; text-shadow: 0 2px 8px oklch(0 0 0 / .3); }
+.pf-lock-brand p { font-size: 13px; opacity: .8; }
+.pf-lock-info { position: absolute; left: 48px; bottom: 48px; z-index: 2; transition: opacity .25s, transform .25s; }
+.pf-lock-time { font-family: "Space Grotesk", sans-serif; font-size: clamp(56px, 10vw, 88px); font-weight: 800; letter-spacing: -3px; line-height: 1; text-shadow: 0 6px 20px oklch(0 0 0 / .45); font-variant-numeric: tabular-nums; }
+.pf-lock-date { margin-top: 10px; font-size: 18px; font-weight: 500; text-shadow: 0 2px 10px oklch(0 0 0 / .35); }
+.pf-lock.entering .pf-lock-info { opacity: 0; transform: translateX(-30px); }
+.pf-lock-cta { position: absolute; bottom: 48px; left: 50%; transform: translateX(-50%); z-index: 2; transition: opacity .25s, transform .25s; }
+.pf-lock.entering .pf-lock-cta { opacity: 0; pointer-events: none; transform: translate(-50%, 40px); }
+.pf-clear-btn { backdrop-filter: blur(8px); background: oklch(1 0 0 / .12); border: 1px solid oklch(1 0 0 / .2); border-radius: 100px; padding: 14px 22px; color: inherit; cursor: pointer; display: inline-flex; gap: 10px; align-items: center; font-weight: 600; transition: all .25s; animation: pfBounce 3s 2s infinite; }
+.pf-clear-btn:hover { background: oklch(1 0 0 / .22); transform: scale(1.05); animation: none; }
+@keyframes pfBounce { 0%, 20%, 100% { transform: none; } 8% { transform: translateY(-14px); } 14% { transform: translateY(-5px); } }
+.pf-pin-wrap { position: absolute; left: 50%; top: 50%; z-index: 3; text-align: center; transform: translate(-50%, -30%) scale(.85); opacity: 0; pointer-events: none; transition: opacity .28s, transform .28s; }
+.pf-lock.entering .pf-pin-wrap { opacity: 1; pointer-events: all; transform: translate(-50%, -50%) scale(1); }
+.pf-pin { display: flex; gap: 12px; justify-content: center; }
+.pf-pin-digit { width: 56px; height: 74px; border-radius: 14px; display: grid; place-items: center; position: relative; background: oklch(1 0 0 / .08); border: 1px solid oklch(1 0 0 / .22); box-shadow: 0 8px 24px oklch(0 0 0 / .25), inset 0 2px 0 oklch(1 0 0 / .12); transition: all .25s; }
+.pf-pin-digit.focused::before { content: ""; position: absolute; bottom: 20px; left: 18%; width: 64%; height: 3px; border-radius: 9px; background: currentColor; animation: pfBlink 1.6s infinite; }
+.pf-pin-digit.filled::after { content: ""; width: 16px; height: 16px; border-radius: 50%; background: currentColor; animation: pfPop .2s ease both; }
+@keyframes pfBlink { 50% { opacity: 0; } }
+@keyframes pfPop { from { transform: scale(.25); } }
+.pf-lock.error .pf-pin-digit { background: oklch(0.6 0.18 25 / .15); border-color: oklch(0.65 0.2 25 / .6); }
+.pf-lock.error .pf-pin { animation: pfShake .4s; }
+@keyframes pfShake { 20%, 60% { transform: translateX(-10px); } 40%, 80% { transform: translateX(10px); } }
+.pf-pin-label { margin-top: 18px; font-size: 15px; font-weight: 500; text-shadow: 0 2px 6px oklch(0 0 0 / .3); }
+.pf-pin-label .err { color: oklch(0.7 0.18 25); font-weight: 700; margin-right: 6px; }
+.pf-pin-label button { background: none; border: 0; color: inherit; opacity: .8; cursor: pointer; text-decoration: underline; margin-left: 6px; }
+.pf-keypad { display: grid; grid-template-columns: repeat(3, 64px); gap: 12px; justify-content: center; margin-top: 22px; }
+.pf-keypad button { height: 64px; border-radius: 50%; background: oklch(1 0 0 / .1); border: 1px solid oklch(1 0 0 / .18); color: inherit; font-size: 22px; font-family: "Space Grotesk", sans-serif; font-weight: 600; cursor: pointer; backdrop-filter: blur(6px); transition: background .15s, transform .1s; }
+.pf-keypad button:hover { background: oklch(1 0 0 / .2); }
+.pf-keypad button:active { transform: scale(.92); }
+.pf-spin { animation: pfSpinA 1s linear infinite; }
+@keyframes pfSpinA { to { transform: rotate(360deg); } }
+@media (max-width: 640px) { .pf-lock-brand { left: 20px; top: 22px; } .pf-lock-info { left: 22px; bottom: 120px; } }
