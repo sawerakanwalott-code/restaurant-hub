@@ -3,9 +3,9 @@ import { ExternalLink, FileText, ImageOff, Receipt } from "lucide-react";
 
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Money, PaymentBadge } from "@/components/admin/bits";
-import { PAYMENT_LABEL, type AdminOrder } from "@/lib/admin-store";
+import { PAYMENT_LABEL, type Order } from "@/lib/admin-store";
 
-type Props = { order: AdminOrder };
+type Props = { order: Order };
 
 /** Shows the customer's uploaded JazzCash / EasyPaisa receipt for an order. */
 export function PaymentReceiptDialog({ order }: Props) {
