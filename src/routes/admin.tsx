@@ -17,6 +17,11 @@ import {
   Store,
   Users,
   UtensilsCrossed,
+  Settings as SettingsIcon,
+  Ticket,
+  Star,
+  LineChart,
+  ScrollText,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -66,6 +71,11 @@ const ADMIN_NAV = [
   { to: "/admin/staff", label: "Staff", icon: Users },
   { to: "/admin/branches", label: "Branches", icon: GitBranch },
   { to: "/admin/billing", label: "Billing & Z-Report", icon: FileBarChart2 },
+  { to: "/admin/reports", label: "Sales reports", icon: LineChart },
+  { to: "/admin/coupons", label: "Coupons", icon: Ticket },
+  { to: "/admin/reviews", label: "Reviews", icon: Star },
+  { to: "/admin/activity", label: "Activity log", icon: ScrollText },
+  { to: "/admin/settings", label: "Settings", icon: SettingsIcon },
 ] as const;
 
 const CASHIER_NAV = [

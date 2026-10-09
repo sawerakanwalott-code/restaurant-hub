@@ -169,3 +169,27 @@ Each restaurant has its own admin. These are needed by the admin console and are
 - Reports export: `GET /admin/reports/sales/?from=&to=&format=csv`.
 - Subscription view for the owner: `GET /admin/subscription/` (plan, limits used, next invoice) mirroring platform data.
 - Notifications feed: `GET /admin/notifications/` + WebSocket event `payment_proof_uploaded` so admins see new receipts live.
+
+### C. Restaurant admin endpoints the new admin pages call (scoped to the signed-in tenant)
+Until each exists the page shows "Preview data" and keeps changes on screen only (404/405/501 = not built).
+
+| Page | Endpoint | Notes |
+|---|---|---|
+| Settings | `GET/PATCH /admin/settings/` | Body below. Checkout must read wallet numbers, fees, tax, min order, hours, `pause_online_orders` from here |
+| Coupons | `GET/POST /admin/coupons/` · `PATCH/DELETE /admin/coupons/{id}/` | Validate at `/coupons/preview/`: dates, `max_uses`, `per_customer`, `min_order`, `max_discount` |
+| Reviews | `GET /admin/reviews/` · `POST /admin/reviews/{id}/reply/` `{reply}` · `PATCH /admin/reviews/{id}/` `{hidden}` | Create a review when the customer rates a delivered order (food, delivery, comment) |
+| Activity log | `GET /admin/audit/?category=&q=` | Write a row on every staff mutation (orders, payments, refunds, menu/price, staff, settings) |
+| Sales reports | (optional) `GET /admin/reports/sales/?from=&to=&format=csv` | Page computes from loaded orders today; a server version is needed for long ranges |
+
+Settings body:
+```json
+{"name":"…","phone":"…","address":"…","logo_url":"…","tax_percent":16,"service_charge_percent":0,
+ "min_order":500,"delivery_fee":150,"free_delivery_over":3000,"delivery_radius_km":6,
+ "jazzcash_number":"…","jazzcash_title":"…","easypaisa_number":"…","easypaisa_title":"…",
+ "accept_cod":true,"accept_wallets":true,"require_receipt":true,"auto_accept_orders":false,"pause_online_orders":false,
+ "hours":[{"day":"Monday","open":"12:00","close":"00:00","closed":false}],
+ "holidays":[{"date":"2026-10-30","note":"Eid — closed"}]}
+```
+Coupon: `{"id","code","kind":"percent|flat|free_delivery","value","min_order","max_discount","uses","max_uses","per_customer","starts","ends","active"}`
+Review: `{"id","order_code","customer","rating","food","delivery","comment","at","reply","hidden"}`
+Audit: `{"id","at","actor","role","action","target","category":"order|payment|menu|staff|settings|refund"}`

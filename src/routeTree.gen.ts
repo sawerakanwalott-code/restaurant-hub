@@ -24,14 +24,19 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as RiderRouteImport } from './routes/rider'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminActivityRouteImport } from './routes/admin.activity'
 import { Route as AdminBillingRouteImport } from './routes/admin.billing'
 import { Route as AdminBranchesRouteImport } from './routes/admin.branches'
+import { Route as AdminCouponsRouteImport } from './routes/admin.coupons'
 import { Route as AdminCustomersRouteImport } from './routes/admin.customers'
 import { Route as AdminDishesRouteImport } from './routes/admin.dishes'
 import { Route as AdminInventoryRouteImport } from './routes/admin.inventory'
 import { Route as AdminPaymentsRouteImport } from './routes/admin.payments'
 import { Route as AdminPosRouteImport } from './routes/admin.pos'
+import { Route as AdminReportsRouteImport } from './routes/admin.reports'
+import { Route as AdminReviewsRouteImport } from './routes/admin.reviews'
 import { Route as AdminRidersRouteImport } from './routes/admin.riders'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminStaffRouteImport } from './routes/admin.staff'
 import { Route as AdminWhatsappRouteImport } from './routes/admin.whatsapp'
 import { Route as DishSlugRouteImport } from './routes/dish.$slug'
@@ -118,6 +123,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminActivityRoute = AdminActivityRouteImport.update({
+  id: '/activity',
+  path: '/activity',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminBillingRoute = AdminBillingRouteImport.update({
   id: '/billing',
   path: '/billing',
@@ -126,6 +136,11 @@ const AdminBillingRoute = AdminBillingRouteImport.update({
 const AdminBranchesRoute = AdminBranchesRouteImport.update({
   id: '/branches',
   path: '/branches',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCouponsRoute = AdminCouponsRouteImport.update({
+  id: '/coupons',
+  path: '/coupons',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminCustomersRoute = AdminCustomersRouteImport.update({
@@ -153,9 +168,24 @@ const AdminPosRoute = AdminPosRouteImport.update({
   path: '/pos',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminReportsRoute = AdminReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminReviewsRoute = AdminReviewsRouteImport.update({
+  id: '/reviews',
+  path: '/reviews',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminRidersRoute = AdminRidersRouteImport.update({
   id: '/riders',
   path: '/riders',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminStaffRoute = AdminStaffRouteImport.update({
@@ -224,14 +254,19 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/rider': typeof RiderRouteWithChildren
   '/signup': typeof SignupRoute
+  '/admin/activity': typeof AdminActivityRoute
   '/admin/billing': typeof AdminBillingRoute
   '/admin/branches': typeof AdminBranchesRoute
+  '/admin/coupons': typeof AdminCouponsRoute
   '/admin/customers': typeof AdminCustomersRoute
   '/admin/dishes': typeof AdminDishesRoute
   '/admin/inventory': typeof AdminInventoryRoute
   '/admin/payments': typeof AdminPaymentsRoute
   '/admin/pos': typeof AdminPosRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/reviews': typeof AdminReviewsRoute
   '/admin/riders': typeof AdminRidersRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/admin/staff': typeof AdminStaffRoute
   '/admin/whatsapp': typeof AdminWhatsappRoute
   '/dish/$slug': typeof DishSlugRoute
@@ -257,14 +292,19 @@ export interface FileRoutesByTo {
   '/profile': typeof ProfileRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
+  '/admin/activity': typeof AdminActivityRoute
   '/admin/billing': typeof AdminBillingRoute
   '/admin/branches': typeof AdminBranchesRoute
+  '/admin/coupons': typeof AdminCouponsRoute
   '/admin/customers': typeof AdminCustomersRoute
   '/admin/dishes': typeof AdminDishesRoute
   '/admin/inventory': typeof AdminInventoryRoute
   '/admin/payments': typeof AdminPaymentsRoute
   '/admin/pos': typeof AdminPosRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/reviews': typeof AdminReviewsRoute
   '/admin/riders': typeof AdminRidersRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/admin/staff': typeof AdminStaffRoute
   '/admin/whatsapp': typeof AdminWhatsappRoute
   '/dish/$slug': typeof DishSlugRoute
@@ -293,14 +333,19 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/rider': typeof RiderRouteWithChildren
   '/signup': typeof SignupRoute
+  '/admin/activity': typeof AdminActivityRoute
   '/admin/billing': typeof AdminBillingRoute
   '/admin/branches': typeof AdminBranchesRoute
+  '/admin/coupons': typeof AdminCouponsRoute
   '/admin/customers': typeof AdminCustomersRoute
   '/admin/dishes': typeof AdminDishesRoute
   '/admin/inventory': typeof AdminInventoryRoute
   '/admin/payments': typeof AdminPaymentsRoute
   '/admin/pos': typeof AdminPosRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/reviews': typeof AdminReviewsRoute
   '/admin/riders': typeof AdminRidersRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/admin/staff': typeof AdminStaffRoute
   '/admin/whatsapp': typeof AdminWhatsappRoute
   '/dish/$slug': typeof DishSlugRoute
@@ -330,14 +375,19 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/rider'
     | '/signup'
+    | '/admin/activity'
     | '/admin/billing'
     | '/admin/branches'
+    | '/admin/coupons'
     | '/admin/customers'
     | '/admin/dishes'
     | '/admin/inventory'
     | '/admin/payments'
     | '/admin/pos'
+    | '/admin/reports'
+    | '/admin/reviews'
     | '/admin/riders'
+    | '/admin/settings'
     | '/admin/staff'
     | '/admin/whatsapp'
     | '/dish/$slug'
@@ -363,14 +413,19 @@ export interface FileRouteTypes {
     | '/profile'
     | '/reset-password'
     | '/signup'
+    | '/admin/activity'
     | '/admin/billing'
     | '/admin/branches'
+    | '/admin/coupons'
     | '/admin/customers'
     | '/admin/dishes'
     | '/admin/inventory'
     | '/admin/payments'
     | '/admin/pos'
+    | '/admin/reports'
+    | '/admin/reviews'
     | '/admin/riders'
+    | '/admin/settings'
     | '/admin/staff'
     | '/admin/whatsapp'
     | '/dish/$slug'
@@ -398,14 +453,19 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/rider'
     | '/signup'
+    | '/admin/activity'
     | '/admin/billing'
     | '/admin/branches'
+    | '/admin/coupons'
     | '/admin/customers'
     | '/admin/dishes'
     | '/admin/inventory'
     | '/admin/payments'
     | '/admin/pos'
+    | '/admin/reports'
+    | '/admin/reviews'
     | '/admin/riders'
+    | '/admin/settings'
     | '/admin/staff'
     | '/admin/whatsapp'
     | '/dish/$slug'
@@ -545,6 +605,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/activity': {
+      id: '/admin/activity'
+      path: '/activity'
+      fullPath: '/admin/activity'
+      preLoaderRoute: typeof AdminActivityRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/billing': {
       id: '/admin/billing'
       path: '/billing'
@@ -557,6 +624,13 @@ declare module '@tanstack/react-router' {
       path: '/branches'
       fullPath: '/admin/branches'
       preLoaderRoute: typeof AdminBranchesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/coupons': {
+      id: '/admin/coupons'
+      path: '/coupons'
+      fullPath: '/admin/coupons'
+      preLoaderRoute: typeof AdminCouponsRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/customers': {
@@ -594,11 +668,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPosRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/reports': {
+      id: '/admin/reports'
+      path: '/reports'
+      fullPath: '/admin/reports'
+      preLoaderRoute: typeof AdminReportsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/reviews': {
+      id: '/admin/reviews'
+      path: '/reviews'
+      fullPath: '/admin/reviews'
+      preLoaderRoute: typeof AdminReviewsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/riders': {
       id: '/admin/riders'
       path: '/riders'
       fullPath: '/admin/riders'
       preLoaderRoute: typeof AdminRidersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/staff': {
@@ -675,14 +770,19 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminActivityRoute: typeof AdminActivityRoute
   AdminBillingRoute: typeof AdminBillingRoute
   AdminBranchesRoute: typeof AdminBranchesRoute
+  AdminCouponsRoute: typeof AdminCouponsRoute
   AdminCustomersRoute: typeof AdminCustomersRoute
   AdminDishesRoute: typeof AdminDishesRoute
   AdminInventoryRoute: typeof AdminInventoryRoute
   AdminPaymentsRoute: typeof AdminPaymentsRoute
   AdminPosRoute: typeof AdminPosRoute
+  AdminReportsRoute: typeof AdminReportsRoute
+  AdminReviewsRoute: typeof AdminReviewsRoute
   AdminRidersRoute: typeof AdminRidersRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
   AdminStaffRoute: typeof AdminStaffRoute
   AdminWhatsappRoute: typeof AdminWhatsappRoute
   AdminIndexRoute: typeof AdminIndexRoute
@@ -691,14 +791,19 @@ interface AdminRouteChildren {
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminActivityRoute: AdminActivityRoute,
   AdminBillingRoute: AdminBillingRoute,
   AdminBranchesRoute: AdminBranchesRoute,
+  AdminCouponsRoute: AdminCouponsRoute,
   AdminCustomersRoute: AdminCustomersRoute,
   AdminDishesRoute: AdminDishesRoute,
   AdminInventoryRoute: AdminInventoryRoute,
   AdminPaymentsRoute: AdminPaymentsRoute,
   AdminPosRoute: AdminPosRoute,
+  AdminReportsRoute: AdminReportsRoute,
+  AdminReviewsRoute: AdminReviewsRoute,
   AdminRidersRoute: AdminRidersRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
   AdminStaffRoute: AdminStaffRoute,
   AdminWhatsappRoute: AdminWhatsappRoute,
   AdminIndexRoute: AdminIndexRoute,
