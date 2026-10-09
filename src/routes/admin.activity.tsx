@@ -50,7 +50,7 @@ function ActivityPage() {
       <SampleNote show={sample} what="The activity log" />
 
       <div className="flex flex-wrap items-center gap-3">
-        <SegmentedTabs value={cat} onChange={setCat} options={(["all", "order", "payment", "refund", "menu", "staff", "settings"] as Cat[]).map((v) => ({ value: v, label: v === "all" ? "All" : v[0].toUpperCase() + v.slice(1) }))} />
+        <SegmentedTabs value={cat} onChange={setCat} options={(["all", "order", "payment", "refund", "menu", "staff", "settings"] as Cat[]).map((v) => ({ id: v, label: v === "all" ? "All" : v[0].toUpperCase() + v.slice(1) }))} />
         <LuxSearch value={q} onChange={setQ} placeholder="Search person, action or order" className="ml-auto w-72" />
       </div>
 

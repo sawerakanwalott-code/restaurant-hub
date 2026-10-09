@@ -62,7 +62,7 @@ function ReviewsPage() {
             {dist.map(({ n, c }) => (
               <div key={n} className="flex items-center gap-3 text-xs">
                 <span className="w-6 text-frost">{n}★</span>
-                <div className="flex-1"><Bar value={c} max={Math.max(data.length, 1)} tone={n <= 2 ? "bad" : "gold"} /></div>
+                <div className="flex-1"><Bar value={c} max={Math.max(data.length, 1)} tone={n <= 2 ? "ruby" : "gold"} /></div>
                 <span className="w-6 text-right text-slate-dim">{c}</span>
               </div>
             ))}
@@ -70,7 +70,7 @@ function ReviewsPage() {
         </Panel>
 
         <div className="space-y-3">
-          <SegmentedTabs value={tab} onChange={setTab} options={[{ value: "all", label: "All" }, { value: "unanswered", label: "Unanswered" }, { value: "low", label: "1–2 stars" }]} />
+          <SegmentedTabs value={tab} onChange={setTab} options={[{ id: "all", label: "All" }, { id: "unanswered", label: "Unanswered" }, { id: "low", label: "1–2 stars" }]} />
           {rows.map((r) => (
             <Panel key={r.id} bodyClassName={`p-5 space-y-3 ${r.hidden ? "opacity-50" : ""}`}>
               <div className="flex flex-wrap items-center gap-3">
