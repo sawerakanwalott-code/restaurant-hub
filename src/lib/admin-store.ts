@@ -60,6 +60,8 @@ export type Order = {
     paidAt: number | null;
     amountPaid: number;
     verifiedBy: string | null;
+    /** Uploaded wallet receipt (JazzCash / EasyPaisa screenshot or PDF) */
+    proofUrl?: string | null;
   };
   status: OrderStatus;
   priority: Priority;
@@ -557,6 +559,7 @@ function normalizeBackendOrder(bo: any): Order {
       paidAt: bo.paid_at ? new Date(bo.paid_at).getTime() : null,
       amountPaid: Number(bo.amount_paid || 0),
       verifiedBy: bo.verified_by || null,
+      proofUrl: bo.payment_proof_url || bo.payment_proof || bo.receipt_url || null,
     },
     status: (bo.status === "dispatched" ? "onway" : bo.status === "new" ? "pending" : bo.status || "confirmed") as OrderStatus,
     priority: (["rush", "vip", "normal"].includes(bo.priority) ? bo.priority : "normal") as Priority,

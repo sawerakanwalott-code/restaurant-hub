@@ -6,6 +6,7 @@ import { z } from "zod";
 
 import { AdminCreateOrderModal } from "@/components/admin/AdminCreateOrderModal";
 import { RiderRatingDialog } from "@/components/admin/RiderRatingDialog";
+import { PaymentReceiptDialog } from "@/components/admin/PaymentReceiptDialog";
 
 import {
   DangerButton,
@@ -265,7 +266,12 @@ function OrdersDesk() {
                   <Money value={o.total} className="text-lux" />
                   <PaymentBadge status={o.payment.status} />
                 </div>
-                <p className="text-[11px] text-slate-dim">{PAYMENT_LABEL[o.payment.method]}</p>
+                <div className="flex items-center gap-2">
+                  <p className="text-[11px] text-slate-dim">{PAYMENT_LABEL[o.payment.method]}</p>
+                  {(o.payment.method === "jazzcash" || o.payment.method === "easypaisa") && (
+                    <PaymentReceiptDialog order={o} />
+                  )}
+                </div>
               </div>
 
               {/* controls */}
