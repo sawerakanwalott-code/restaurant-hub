@@ -140,7 +140,7 @@ export function CounterPOSPage() {
 
   // ── cart ops ──
   const add = (d: Dish, size?: string) => {
-    if (!size && (d.sizes?.length ?? 0) > 1) return setSizeFor(d);
+    if (!size && (d.sizes?.length ?? 0) > 1) return void setSizeFor(d);
     const sz = size ?? d.sizes?.[0]?.size ?? "Regular";
     const key = lineKey(d.slug, sz, "");
     setLines((p) => p.some((l) => l.key === key)
@@ -157,7 +157,7 @@ export function CounterPOSPage() {
   };
 
   const hold = useCallback(() => {
-    if (!lines.length) return toast.error("Nothing to hold");
+    if (!lines.length) return void toast.error("Nothing to hold");
     const label = type === "dine_in" && table ? `Table ${table}` : customer.name || `Order ${held.length + 1}`;
     setHeld((h) => [{ id: uid(), at: new Date().toISOString(), label, lines, type, table, customer, discount }, ...h]);
     reset(); toast.success(`Held — ${label}`);
@@ -185,7 +185,7 @@ export function CounterPOSPage() {
   const printNow = (mode: "receipt" | "kot") => { setPrintMode(mode); setTimeout(() => window.print(), 50); };
 
   const sendKot = () => {
-    if (!unsent) return toast.info("Kitchen already has every item");
+    if (!unsent) return void toast.info("Kitchen already has every item");
     setReceipt({ code: "KOT", at: new Date().toLocaleString(), type, table, cashier, customer, lines: lines.map((l) => ({ ...l, qty: l.qty - l.sentQty })).filter((l) => l.qty > 0), totals, payments: [], tendered: 0, change: 0, offline: false });
     setLines((p) => p.map((l) => ({ ...l, sentQty: l.qty })));
     printNow("kot");
@@ -194,8 +194,8 @@ export function CounterPOSPage() {
   // ── checkout ──
   const complete = async (payments: { method: PayMethod; amount: number; ref?: string }[], tendered: number) => {
     if (!shift) { toast.error("Open a shift first"); setPanel("shift"); return; }
-    if (type === "dine_in" && !table) return toast.error("Pick a table");
-    if (type === "delivery" && (!customer.phone || !customer.address)) return toast.error("Delivery needs phone and address");
+    if (type === "dine_in" && !table) return void toast.error("Pick a table");
+    if (type === "delivery" && (!customer.phone || !customer.address)) return void toast.error("Delivery needs phone and address");
     setBusy(true);
     const payload = {
       source: "pos", order_type: type, status: "confirmed", shift_id: shift.id,
@@ -236,7 +236,7 @@ export function CounterPOSPage() {
   const voidSale = async (s: PosSale) => {
     const reason = window.prompt(`Reason for voiding ${s.code}?`);
     if (!reason) return;
-    try { await api.post(POS_API.voidOrder(s.code), { reason }); } catch (e) { if (!notBuilt(e)) return toast.error("Could not void"); toast.info("Voided on this till only", { description: "The server part isn't ready yet." }); }
+    try { await api.post(POS_API.voidOrder(s.code), { reason }); } catch (e) { if (!notBuilt(e)) return void toast.error("Could not void"); toast.info("Voided on this till only", { description: "The server part isn't ready yet." }); }
     setSales((all) => all.map((x) => (x.code === s.code ? { ...x, voided: true } : x)));
   };
 
@@ -527,7 +527,7 @@ function DiscountForm({ value, subtotal, onSave }: { value: Discount; subtotal: 
       <div className="flex justify-between text-sm"><span className="text-muted-foreground">Discount</span><b className="text-primary">− {Rs(Math.min(subtotal, amt))}</b></div>
       <div className="grid grid-cols-2 gap-2">
         <button onClick={() => onSave({ kind: "flat", value: 0, reason: "" })} className="pos-act">Remove</button>
-        <button onClick={() => { if (d.value > 0 && !d.reason.trim()) return toast.error("Add a reason"); onSave(d); }} className="pos-act bg-primary text-primary-foreground border-primary">Apply</button>
+        <button onClick={() => { if (d.value > 0 && !d.reason.trim()) return void toast.error("Add a reason"); onSave(d); }} className="pos-act bg-primary text-primary-foreground border-primary">Apply</button>
       </div>
     </div>
   );
@@ -544,7 +544,7 @@ function PayPanel({ total, busy, onDone }: { total: number; busy: boolean; onDon
   const key = (k: string) => setEntry((e) => (k === "C" ? "" : k === "<" ? e.slice(0, -1) : (e + k).replace(/^0+(?=\d)/, "").slice(0, 7)));
 
   const finish = (amount: number) => {
-    if (method !== "cash" && !ref.trim() && method !== "card") return toast.error("Enter the wallet transaction ID");
+    if (method !== "cash" && !ref.trim() && method !== "card") return void toast.error("Enter the wallet transaction ID");
     const take = method === "cash" ? amount : Math.min(amount, remaining);
     const all = [...parts, { method, amount: Math.min(take, remaining), ref: ref.trim() || undefined }];
     if (take < remaining) { setParts(all); setEntry(""); setRef(""); toast.info(`Rs ${remaining - take} left — choose next method`); return; }
@@ -620,7 +620,7 @@ function ShiftPanel({ shift, sales, cashier, setShift }: { shift: Shift | null; 
   const by = salesByMethod(valid);
   const expected = expectedCash(shift, valid);
   const move = async (kind: CashMove["kind"]) => {
-    if (amount <= 0 || !reason.trim()) return toast.error("Enter amount and reason");
+    if (amount <= 0 || !reason.trim()) return void toast.error("Enter amount and reason");
     const m: CashMove = { at: new Date().toISOString(), kind, amount, reason };
     await call(POS_API.cashMove(shift.id), m).catch(() => {});
     setShift({ ...shift, moves: [...shift.moves, m] }); setAmount(0); setReason(""); toast.success(kind === "in" ? "Cash added" : "Cash removed");
